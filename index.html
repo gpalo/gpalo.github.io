@@ -46,14 +46,16 @@
             var wordArray = initialText.split(' ');
             var interval = null;
 
-            $('#start').click(function(){
+            $('#start').click(function(event){
+              event.preventDefault();
               startDys();
             });
 
-            $('#stop').click(function() {
+            $('#stop').click(function(event) {
+              event.preventDefault();
               stopDys();
             });
-            
+ 
             function stopDys() {
                 if (interval !== null) {
                     clearInterval(interval);
