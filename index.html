@@ -57,13 +57,11 @@
             });
  
             function stopDys() {
-                if (interval !== null) {
-                    clearInterval(interval);
-                    $('.dys').text(initialText);
-                }
+              clearInterval(interval);
+              $('.dys').text(initialText);
             }
             function startDys() {
-                interval = setInterval(function () {
+              clearInterval(interval);interval = setInterval(function () {
                     $(wordArray).each(function (index) {
                         var word = this;
 
