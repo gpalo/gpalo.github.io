@@ -58,6 +58,16 @@
         <script type="text/javascript">
             var t = $('.dys').text();
             var wordArray = t.split(' ');
+            var interval = null;
+
+            $('#start').click(function(){
+              startDys();
+            });
+
+            $('#stop').click(function() {
+              stopDys();
+            });
+            
             function stopDys() {
                 if (interval !== null) {
                     clearInterval(interval);
