@@ -1,1 +1,50 @@
-Hello world!
+<html>
+<body>
+<p class="dys">Op deze pagina kun je ervaren hoe het is om dyslexie te hebben. Deze ervaring is gebaseerd op ‘typoglykemie’. Dat is een onofficiële term voor het fenomeen dat woorden waarvan de eerste en laatste letters blijven staan, maar de letters daar tussenin door elkaar gehusseld zijn, goed leesbaar blijven. Bovendien verspringen de letters in het midden ook nog eens om het extra lastig te maken.</p>
+<script
+    src="https://code.jquery.com/jquery-2.2.3.min.js"
+    integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
+crossorigin="anonymous"></script>
+<script type="text/javascript">
+  var t = $('.dys').text();
+  var wordArray = t.split(' ');
+  setInterval(function(){
+    $(wordArray).each(function(index){
+      var word = this;
+      
+      //skip short words and apply a random chance (65%) of skipping the word
+      if(word.length <= 3 || randomBool()) {
+        return;
+      }
+      //select a random letter , not first or last and switch with other random
+      // a[index] = replaceAt(w, randomIntFromInterval(1, w.length-1), w[randomIntFromInterval(1, w.length-1)] );
+      var randomWordPosIndex = randomIntFromInterval(1, word.length-2);
+      var randomWordPosIndex2 = randomIntFromInterval(1, word.length-2);
+
+      var charAtPos1 = word.substr(randomWordPosIndex,1);
+      var charAtPos2 = word.substr(randomWordPosIndex2, 1);
+
+      
+      word = replaceAt(word, randomWordPosIndex2, charAtPos1);
+      word = replaceAt(word, randomWordPosIndex, charAtPos2);
+      wordArray[index] = word;
+    });
+    $('.dys').text(wordArray.join(" "));
+  },200);
+
+
+  //min/max inclusive
+  function randomIntFromInterval(min, max) {
+      return Math.floor(Math.random()*(max-min+1)+min);
+  }
+
+  function replaceAt(word, pos, char) {
+    return word.substr(0, pos) + char + word.substr(pos+1, word.length)
+  }
+
+  function randomBool() {
+    return Math.random()<.65;
+  }
+</script>
+</body>
+</html>
