@@ -1,50 +1,108 @@
-<html>
-<body>
-<p class="dys">Op deze pagina kun je ervaren hoe het is om dyslexie te hebben. Deze ervaring is gebaseerd op ‘typoglykemie’. Dat is een onofficiële term voor het fenomeen dat woorden waarvan de eerste en laatste letters blijven staan, maar de letters daar tussenin door elkaar gehusseld zijn, goed leesbaar blijven. Bovendien verspringen de letters in het midden ook nog eens om het extra lastig te maken.</p>
-<script
-    src="https://code.jquery.com/jquery-2.2.3.min.js"
-    integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
-crossorigin="anonymous"></script>
-<script type="text/javascript">
-  var t = $('.dys').text();
-  var wordArray = t.split(' ');
-  setInterval(function(){
-    $(wordArray).each(function(index){
-      var word = this;
-      
-      //skip short words and apply a random chance (65%) of skipping the word
-      if(word.length <= 3 || randomBool()) {
-        return;
-      }
-      //select a random letter , not first or last and switch with other random
-      // a[index] = replaceAt(w, randomIntFromInterval(1, w.length-1), w[randomIntFromInterval(1, w.length-1)] );
-      var randomWordPosIndex = randomIntFromInterval(1, word.length-2);
-      var randomWordPosIndex2 = randomIntFromInterval(1, word.length-2);
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-      var charAtPos1 = word.substr(randomWordPosIndex,1);
-      var charAtPos2 = word.substr(randomWordPosIndex2, 1);
+        <title>Cover Template for Bootstrap</title>
 
-      
-      word = replaceAt(word, randomWordPosIndex2, charAtPos1);
-      word = replaceAt(word, randomWordPosIndex, charAtPos2);
-      wordArray[index] = word;
-    });
-    $('.dys').text(wordArray.join(" "));
-  },200);
+        <!-- Bootstrap core CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div class="site-wrapper">
+
+            <div class="site-wrapper-inner">
+
+                <div class="cover-container">
+
+                    <!--                     <div class="masthead clearfix">
+                                            <div class="inner">
+                                                <h3 class="masthead-brand">Cover</h3>
+                                                <nav class="nav nav-masthead">
+                                                    <a class="nav-link active" href="#">Home</a>
+                                                    <a class="nav-link" href="#">Features</a>
+                                                    <a class="nav-link" href="#">Contact</a>
+                                                </nav>
+                                            </div>
+                                        </div> -->
+
+                    <div class="inner cover">
+                        <h1 class="cover-heading">Workshop dyslexie</h1>
+                        <p class="lead dys">Als je zelf geen dyslexie hebt is het moeilijk om je voor te stellen hoe dit voelt. Een bekende beschrijving van dyslexie is dat het lijkt alsof de letters verspringen. De letters staan er wel en ze zijn los van elkaar ook prima te lezen maar het is lastig om snel woorden te herkennen.</p>
+
+                        <button id="start">Start</button>
+                        <button id="stop">Stop</button>
+                        <p class="lead">
+                            <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+                        </p>
+                    </div>
+
+                    <div class="mastfoot">
+                        <div class="inner">
+                            <p>Gino Palo</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            var t = $('.dys').text();
+            var wordArray = t.split(' ');
+            function stopDys() {
+                if (interval !== null) {
+                    clearInterval(interval);
+                    $('.dys').text(initialText);
+                }
+            }
+            function startDys() {
+                interval = setInterval(function () {
+                    $(wordArray).each(function (index) {
+                        var word = this;
+
+                        //skip short words and apply a random chance (65%) of skipping the word
+                        if (word.length <= 3 || randomBool()) {
+                            return;
+                        }
+                        //select a random letter , not first or last and switch with other random
+                        // a[index] = replaceAt(w, randomIntFromInterval(1, w.length-1), w[randomIntFromInterval(1, w.length-1)] );
+                        var randomWordPosIndex = randomIntFromInterval(1, word.length - 2);
+                        var randomWordPosIndex2 = randomIntFromInterval(1, word.length - 2);
+
+                        var charAtPos1 = word.substr(randomWordPosIndex, 1);
+                        var charAtPos2 = word.substr(randomWordPosIndex2, 1);
 
 
-  //min/max inclusive
-  function randomIntFromInterval(min, max) {
-      return Math.floor(Math.random()*(max-min+1)+min);
-  }
+                        word = replaceAt(word, randomWordPosIndex2, charAtPos1);
+                        word = replaceAt(word, randomWordPosIndex, charAtPos2);
+                        wordArray[index] = word;
+                    });
+                    $('.dys').text(wordArray.join(" "));
+                }, 200);
+            }
 
-  function replaceAt(word, pos, char) {
-    return word.substr(0, pos) + char + word.substr(pos+1, word.length)
-  }
+            //min/max inclusive
+            function randomIntFromInterval(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }
 
-  function randomBool() {
-    return Math.random()<.65;
-  }
-</script>
-</body>
+            function replaceAt(word, pos, char) {
+                return word.substr(0, pos) + char + word.substr(pos + 1, word.length)
+            }
+
+            function randomBool() {
+                return Math.random() < .65;
+            }
+        </script>
+    </body>
 </html>
+
