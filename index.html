@@ -20,31 +20,32 @@
                 <div class="cover-container">
                     <div class="inner cover">
                         <h1 class="cover-heading">Workshop Dyslexie</h1>
-                        <p class="lead dys">Als je zelf geen dyslexie hebt is het moeilijk om je voor te stellen hoe dit voelt. Een bekende beschrijving van dyslexie is dat het lijkt alsof de letters verspringen. De letters staan er wel en ze zijn los van elkaar ook prima te lezen maar het is lastig om snel woorden te herkennen.</p>
-                    <p class="lead">
-                        <a href="#" id="start" class="btn btn-lg btn-secondary">Start</a>
-                        <a href="#" id="stop" class="btn btn-lg btn-secondary">Stop</a>
-                    </p>
-                    
-		    </div>
-
+                        <p class="lead dys">Om de beginsituatie te peilen gaan we een aantal vragen beantwoorden. Vul je antwoorden in op het antwoorblad. Na afloop bespreken we de antwoorden.</p>
+                        <ol>
+                            <li data-initial="Kinderen met dyslexie ontwikkelen zich op sociaal-emotioneel vlak even snel als kinderen zonder dyslexie" class="dys">Kinderen met dyslexie ontwikkelen zich op sociaal-emotioneel vlak even snel als kinderen zonder dyslexie</li>
+                            <li data-initial="Er bestaat samenhang tussen IQ en dyslexie" class="dys">Er bestaat samenhang tussen IQ en dyslexie</li>
+                            <li data-initial="Dyslexie is erfelijk" class="dys">Dyslexie is erfelijk</li>
+                            <li data-initial="25% van de kinderen met dyslexie heeft ook AD(H)D" class="dys">25% van de kinderen met dyslexie heeft ook AD(H)D</li>
+                            <li data-initial="Dyslexie komt vaker voor bij jongens dan bij meisjes" class="dys">Dyslexie komt vaker voor bij jongens dan bij meisjes</li>
+                            <li data-initial="Het aantal kinderen met dyslexie neemt langzaam af" class="dys">Het aantal kinderen met dyslexie neemt langzaam af</li>
+                        </ol>
+                        <p class="lead">
+                            <a href="#" id="start" class="btn btn-lg btn-secondary">Start</a>
+                            <a href="#" id="stop" class="btn btn-lg btn-secondary">Stop</a>
+                        </p>
+		            </div>
                     <div class="mastfoot">
                         <div class="inner">
                             <p>Gino Palo</p>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
         <script type="text/javascript">
-            var initialText = $('.dys').text();
-            var wordArray = initialText.split(' ');
-            var interval = null;
+            var intervals = [];
 
             $('#start').click(function(event){
               event.preventDefault();
@@ -57,33 +58,48 @@
             });
  
             function stopDys() {
-              clearInterval(interval);
-              $('.dys').text(initialText);
+                $.each(intervals, function(index){
+                  clearInterval(intervals[index]);
+                });
+              
+                $('.dys').each(function(){
+                  $(this).text($(this).data('initial'));
+                });
+                intervals = [];
             }
             function startDys() {
-              clearInterval(interval);interval = setInterval(function () {
-                    $(wordArray).each(function (index) {
-                        var word = this;
+                stopDys();
+                $('.dys').each(function() {
+                    var $dys = $(this);
+                    var initialText = $dys.text();
+                    var wordArray = initialText.split(' ');
+                    var interval = null;
+                    
+                    clearInterval(interval);interval = setInterval(function () {
+                        $(wordArray).each(function (index) {
+                            var word = this;
 
-                        //skip short words and apply a random chance (65%) of skipping the word
-                        if (word.length <= 3 || randomBool()) {
-                            return;
-                        }
-                        //select a random letter , not first or last and switch with other random
-                        // a[index] = replaceAt(w, randomIntFromInterval(1, w.length-1), w[randomIntFromInterval(1, w.length-1)] );
-                        var randomWordPosIndex = randomIntFromInterval(1, word.length - 2);
-                        var randomWordPosIndex2 = randomIntFromInterval(1, word.length - 2);
+                            //skip short words and apply a random chance (65%) of skipping the word
+                            if (word.length <= 3 || randomBool()) {
+                                return;
+                            }
+                            //select a random letter , not first or last and switch with other random
+                            // a[index] = replaceAt(w, randomIntFromInterval(1, w.length-1), w[randomIntFromInterval(1, w.length-1)] );
+                            var randomWordPosIndex = randomIntFromInterval(1, word.length - 2);
+                            var randomWordPosIndex2 = randomIntFromInterval(1, word.length - 2);
 
-                        var charAtPos1 = word.substr(randomWordPosIndex, 1);
-                        var charAtPos2 = word.substr(randomWordPosIndex2, 1);
+                            var charAtPos1 = word.substr(randomWordPosIndex, 1);
+                            var charAtPos2 = word.substr(randomWordPosIndex2, 1);
 
 
-                        word = replaceAt(word, randomWordPosIndex2, charAtPos1);
-                        word = replaceAt(word, randomWordPosIndex, charAtPos2);
-                        wordArray[index] = word;
-                    });
-                    $('.dys').text(wordArray.join(" "));
-                }, 200);
+                            word = replaceAt(word, randomWordPosIndex2, charAtPos1);
+                            word = replaceAt(word, randomWordPosIndex, charAtPos2);
+                            wordArray[index] = word;
+                        });
+                        $dys.text(wordArray.join(" "));
+                    }, 200);
+                    intervals.push(interval);
+                });
             }
 
             //min/max inclusive
