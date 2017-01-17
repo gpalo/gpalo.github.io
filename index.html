@@ -10,33 +10,41 @@
 
         <!-- Bootstrap core CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <link href="//v4-alpha.getbootstrap.com/examples/cover/cover.css" rel="stylesheet">
+        <link href="https://v4-alpha.getbootstrap.com/examples/cover/cover.css" rel="stylesheet">
+        <style>
+            li {
+                margin-bottom: 21px;
+            }
+            ol {
+                font-size: 17px;
+            }
+        </style>
 	</head>
 
     <body>
 
         <div class="site-wrapper">
             <div class="site-wrapper-inner">
-                <div class="cover-container">
+                <div class="cover-container" style="width: 74rem;">
                     <div class="inner cover">
                         <h1 class="cover-heading">Workshop Dyslexie</h1>
-                        <p class="lead dys">Om de beginsituatie te peilen gaan we een aantal vragen beantwoorden. Vul je antwoorden in op het antwoorblad. Na afloop bespreken we de antwoorden.</p>
-                        <ol>
-                            <li data-initial="Kinderen met dyslexie ontwikkelen zich op sociaal-emotioneel vlak even snel als kinderen zonder dyslexie" class="dys">Kinderen met dyslexie ontwikkelen zich op sociaal-emotioneel vlak even snel als kinderen zonder dyslexie</li>
-                            <li data-initial="Er bestaat samenhang tussen IQ en dyslexie" class="dys">Er bestaat samenhang tussen IQ en dyslexie</li>
-                            <li data-initial="Dyslexie is erfelijk" class="dys">Dyslexie is erfelijk</li>
-                            <li data-initial="25% van de kinderen met dyslexie heeft ook AD(H)D" class="dys">25% van de kinderen met dyslexie heeft ook AD(H)D</li>
-                            <li data-initial="Dyslexie komt vaker voor bij jongens dan bij meisjes" class="dys">Dyslexie komt vaker voor bij jongens dan bij meisjes</li>
-                            <li data-initial="Het aantal kinderen met dyslexie neemt langzaam af" class="dys">Het percentage kinderen met dyslexie neemt langzaam af</li>
-                        </ol>
-                        <p class="lead">
-                            <a href="#" id="start" class="btn btn-lg btn-secondary">Start</a>
-                            <a href="#" id="stop" class="btn btn-lg btn-secondary">Stop</a>
-                        </p>
+                        <p data-initial="Om de beginsituatie te peilen gaan we een aantal vragen beantwoorden. Vul je antwoorden in op het antwoorblad. Na afloop bespreken we de antwoorden." class="lead dys">Om de beginsituatie te peilen gaan we in twee minuten een aantal vragen beantwoorden. Vul je antwoorden in op het antwoorblad. Na afloop zullen we deze bespreken.</p>
+                        <hr>
+                        <div class="text-left">
+                            <ol>
+                                <li data-initial="Kinderen met dyslexie ontwikkelen zich op sociaal-emotioneel vlak even snel als kinderen zonder dyslexie" class="dys">Kinderen met dyslexie ontwikkelen zich op sociaal-emotioneel vlak even snel als kinderen zonder dyslexie</li>
+                                <li data-initial="Er bestaat samenhang tussen IQ en dyslexie" class="dys">Er bestaat samenhang tussen IQ en dyslexie</li>
+                                <li data-initial="Dyslexie is erfelijk" class="dys">Dyslexie is erfelijk</li>
+                                <li data-initial="25% van de kinderen met dyslexie heeft ook AD(H)D" class="dys">25% van de kinderen met dyslexie heeft ook AD(H)D</li>
+                                <li data-initial="Dyslexie komt vaker voor bij jongens dan bij meisjes" class="dys">Dyslexie komt vaker voor bij jongens dan bij meisjes</li>
+                                <li data-initial="Het aantal kinderen met dyslexie neemt langzaam af" class="dys">Het percentage kinderen met dyslexie neemt langzaam af</li>
+                            </ol>
+                        </div>
 		            </div>
-                    <div class="mastfoot">
-                        <div class="inner">
-                            <p>Gino Palo</p>
+                    <div class="text-left" style="margin-top: 100px; margin-left:15px">
+                        <div class="">
+                            <a href="#" id="start" class="btn btn-lg btn-primary" style="margin-right:10px">Start</a>
+                            <a href="#" id="stop" class="btn btn-lg btn-primary">Stop</a>
                         </div>
                     </div>
                 </div>
